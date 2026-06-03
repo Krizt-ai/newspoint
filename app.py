@@ -1,7 +1,6 @@
 import os
 import requests
 
-app = Flask(__name__)
 app.secret_key = "newspoint_secret"
 
 # ================= DATABASE =================
