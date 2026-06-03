@@ -74,7 +74,7 @@ def get_news(query):
 
 @app.route('/')
 def home():
-
+    return "Homepage is working!"
     ph_news = get_news("philippines")
 
     intl_news = get_news("world")
