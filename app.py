@@ -1,5 +1,11 @@
+from flask import Flask, render_template, request, redirect, session
+from flask_mysqldb import MySQL
+from flask_bcrypt import Bcrypt
 import os
 import requests
+
+app = Flask(__name__)
+app.secret_key = "newspoint_secret"
 
 # ================= DATABASE =================
 app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST')
