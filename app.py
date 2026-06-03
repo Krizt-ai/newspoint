@@ -19,7 +19,7 @@ mysql = MySQL(app)
 bcrypt = Bcrypt(app)
 
 # ================= API =================
-app.config['API_KEY'] = os.getenv('API_KEY')
+API_KEY = os.getenv('API_KEY')
 
 # ================= GLOBAL BOOKMARK COUNT =================
 
