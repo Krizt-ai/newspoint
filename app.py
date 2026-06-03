@@ -57,19 +57,20 @@ def inject_bookmarks():
 # ================= GET NEWS =================
 
 def get_news(query):
-
     url = f"https://gnews.io/api/v4/search?q={query}&lang=en&max=20&token={API_KEY}"
 
     try:
+        response = requests.get(url, timeout=10)
 
-        response = requests.get(url)
+        print("STATUS:", response.status_code)
+        print("BODY:", response.text[:500])
 
         data = response.json()
 
         return data.get("articles", [])
 
-    except:
-
+    except Exception as e:
+        print("NEWS ERROR:", e)
         return []
 
 # ================= HOME =================
