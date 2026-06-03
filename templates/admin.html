@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- ================= DASHBOARD HEADER ================= -->
+
+<div class="dashboard-header">
+
+    <div>
+
+        <h1>Admin Dashboard</h1>
+
+        <p class="dashboard-subtitle">
+            Monitor users, publish breaking news, and manage NewsPoint content.
+        </p>
+
+    </div>
+
+</div>
+
+<!-- ================= STATISTICS ================= -->
+
+<div class="stats-grid">
+
+    <div class="stats-card">
+
+        <div class="stats-icon">👥</div>
+
+        <h2>Total Users</h2>
+
+        <h1>{{ total_users }}</h1>
+
+    </div>
+
+    <div class="stats-card">
+
+        <div class="stats-icon">🛡️</div>
+
+        <h2>Admins</h2>
+
+        <h1>{{ total_admins }}</h1>
+
+    </div>
+
+    <div class="stats-card">
+
+        <div class="stats-icon">🙋</div>
+
+        <h2>Normal Users</h2>
+
+        <h1>{{ total_normal_users }}</h1>
+
+    </div>
+
+    <div class="stats-card">
+
+        <div class="stats-icon">📰</div>
+
+        <h2>Total News Posts</h2>
+
+        <h1>{{ total_posts }}</h1>
+
+    </div>
+
+</div>
+
+<!-- ================= MAIN DASHBOARD ================= -->
+
+<div class="dashboard-layout">
+
+    <!-- ================= LEFT SIDE ================= -->
+
+    <div class="dashboard-left">
+
+        <div class="dashboard-card">
+
+            <div class="card-header">
+
+                <h2>Publish News Article</h2>
+
+                <p>Create and publish breaking news updates.</p>
+
+            </div>
+
+            <form method="POST">
+
+                <input
+                    type="text"
+                    name="title"
+                    placeholder="Enter news title..."
+                    required
+                >
+
+                <textarea
+                    name="content"
+                    placeholder="Write your full news article here..."
+                    required
+                ></textarea>
+
+                <select name="category">
+
+                    <option>Philippines</option>
+                    <option>World</option>
+                    <option>Sports</option>
+                    <option>Business</option>
+                    <option>Technology</option>
+                    <option>Health</option>
+                    <option>Entertainment</option>
+                    <option>Celebrities</option>
+                    <option>Science</option>
+
+                </select>
+
+                <button type="submit">
+                    Publish News
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- ================= RIGHT SIDE ================= -->
+
+    <div class="dashboard-right">
+
+        <div class="dashboard-card">
+
+            <div class="card-header">
+
+                <h2>Latest Posted News</h2>
+
+                <p>Recently published news articles.</p>
+
+            </div>
+
+            <div class="admin-posts">
+
+                {% for post in posts %}
+
+                <div class="admin-post">
+
+                    <div class="post-category">
+
+                        {{ post[3] }}
+
+                    </div>
+
+                    <h3>{{ post[1] }}</h3>
+
+                    <p>{{ post[2][:180] }}...</p>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- ================= DASHBOARD HEADER ================= -->
+
+<div class="dashboard-header">
+
+    <h1>Your Bookmarked News</h1>
+
+    <p class="dashboard-subtitle">
+
+        Access all saved articles in one place.
+
+    </p>
+
+</div>
+
+<!-- ================= BOOKMARKS ================= -->
+
+{% if bookmarks %}
+
+<div class="news-grid">
+
+{% for bookmark in bookmarks %}
+
+<div class="news-card">
+
+    <!-- IMAGE -->
+
+    <div class="news-image-container">
+
+        {% if bookmark[4] %}
+
+            <img
+                src="{{ bookmark[4] }}"
+                class="news-img"
+            >
+
+        {% endif %}
+
+    </div>
+
+    <!-- CONTENT -->
+
+    <div class="card-content">
+
+        <span class="news-tag">
+
+            Saved Article
+
+        </span>
+
+        <h3>
+
+            {{ bookmark[2] }}
+
+        </h3>
+
+        <a
+            href="{{ bookmark[3] }}"
+            target="_blank"
+            class="read-more"
+        >
+
+            Read Article →
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% else %}
+
+<!-- EMPTY STATE -->
+
+<div class="empty-bookmarks">
+
+    <div class="empty-icon">
+
+        <i class="fa-regular fa-bookmark"></i>
+
+    </div>
+
+    <h2>
+
+        No Saved News Yet
+
+    </h2>
+
+    <p>
+
+        Bookmark articles to read them later.
+
+    </p>
+
+    <a
+        href="/"
+        class="browse-news-btn"
+    >
+
+        Browse News
+
+    </a>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

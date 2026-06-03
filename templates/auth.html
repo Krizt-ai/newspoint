@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <!-- ================= LEFT SIDE ================= -->
+
+        <div class="auth-left">
+
+            <div>
+
+                <h1>
+                    NEWSPOINT
+                </h1>
+
+                <p>
+                    Stay updated with breaking news, world events,
+                    sports, entertainment, technology, business,
+                    and more — all in one modern news platform.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ================= RIGHT SIDE ================= -->
+
+        <div class="auth-right">
+
+            <!-- ================= FLASH MESSAGES ================= -->
+
+            {% if success %}
+
+                <div class="alert alert-success">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    <span>
+                        {{ success }}
+                    </span>
+
+                </div>
+
+            {% endif %}
+
+            {% if error %}
+
+                <div class="alert alert-error">
+
+                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                    <span>
+                        {{ error }}
+                    </span>
+
+                </div>
+
+            {% endif %}
+
+            <!-- ================= LOGIN FORM ================= -->
+
+            <div
+                id="loginForm"
+                {% if show_register %}
+                    style="display:none;"
+                {% endif %}
+            >
+
+                <h2>
+                    Welcome Back
+                </h2>
+
+                <p class="auth-subtitle">
+                    Login to access your saved bookmarks and personalized dashboard.
+                </p>
+
+                <form
+                    method="POST"
+                    action="/auth"
+                >
+
+                    <input
+                        type="hidden"
+                        name="action"
+                        value="login"
+                    >
+
+                    <div class="input-group">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <input
+                            type="text"
+                            name="username"
+                            placeholder="Enter your username"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                    </div>
+
+                    <button type="submit">
+
+                        <i class="fa-solid fa-right-to-bracket"></i>
+
+                        Login
+
+                    </button>
+
+                </form>
+
+                <div class="switch-text">
+
+                    Don't have an account?
+
+                    <span onclick="showRegister()">
+
+                        Create account
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <!-- ================= REGISTER FORM ================= -->
+
+            <div
+                id="registerForm"
+                {% if not show_register %}
+                    style="display:none;"
+                {% endif %}
+            >
+
+                <h2>
+                    Create Account
+                </h2>
+
+                <p class="auth-subtitle">
+                    Join NEWSPOINT and start bookmarking your favorite news articles.
+                </p>
+
+                <form
+                    method="POST"
+                    action="/auth"
+                >
+
+                    <input
+                        type="hidden"
+                        name="action"
+                        value="register"
+                    >
+
+                    <div class="input-group">
+
+                        <i class="fa-solid fa-user-plus"></i>
+
+                        <input
+                            type="text"
+                            name="username"
+                            placeholder="Choose a username"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Create a secure password"
+                            required
+                        >
+
+                    </div>
+
+                    <button type="submit">
+
+                        <i class="fa-solid fa-user-check"></i>
+
+                        Register
+
+                    </button>
+
+                </form>
+
+                <div class="switch-text">
+
+                    Already have an account?
+
+                    <span onclick="showLogin()">
+
+                        Login here
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+function showRegister(){
+
+    document.getElementById("loginForm").style.display = "none";
+
+    document.getElementById("registerForm").style.display = "block";
+}
+
+function showLogin(){
+
+    document.getElementById("registerForm").style.display = "none";
+
+    document.getElementById("loginForm").style.display = "block";
+}
+
+</script>
+
+{% endblock %}

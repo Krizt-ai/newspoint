@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NEWSPOINT</title>
+
+    <!-- GOOGLE FONT -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- FONT AWESOME -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
+    <!-- MAIN CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<!-- ================= TOP BAR ================= -->
+
+<div class="top-bar">
+
+    <div class="top-bar-content">
+
+        <span>LIVE NEWS</span>
+
+        <span>•</span>
+
+        <span>PHILIPPINES</span>
+
+        <span>•</span>
+
+        <span>WORLD</span>
+
+        <span>•</span>
+
+        <span>TECHNOLOGY</span>
+
+        <span>•</span>
+
+        <span>BUSINESS</span>
+
+    </div>
+
+</div>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <!-- ================= LOGO ================= -->
+
+    <a
+        href="/"
+        class="logo-link"
+    >
+
+        <div class="logo">
+
+            <img
+                src="{{ url_for('static', filename='logo.png') }}"
+                alt="NEWSPOINT Logo"
+            >
+
+            <span>NEWSPOINT</span>
+
+        </div>
+
+    </a>
+
+    <!-- ================= CENTER NAVIGATION ================= -->
+
+    <div class="nav-links">
+
+        <!-- HOME -->
+
+        <a href="/">
+
+            Home
+
+        </a>
+
+        <!-- CATEGORY DROPDOWN -->
+
+        <div class="dropdown">
+
+            <button class="dropbtn">
+
+                Categories
+
+                <i class="fa-solid fa-chevron-down small-icon"></i>
+
+            </button>
+
+            <div class="dropdown-content">
+
+                <a href="/category/philippines">
+
+                    <i class="fa-solid fa-earth-asia"></i>
+
+                    Philippines
+
+                </a>
+
+                <a href="/category/world">
+
+                    <i class="fa-solid fa-globe"></i>
+
+                    World
+
+                </a>
+
+                <a href="/category/business">
+
+                    <i class="fa-solid fa-briefcase"></i>
+
+                    Business
+
+                </a>
+
+                <a href="/category/technology">
+
+                    <i class="fa-solid fa-microchip"></i>
+
+                    Technology
+
+                </a>
+
+                <a href="/category/health">
+
+                    <i class="fa-solid fa-heart-pulse"></i>
+
+                    Health
+
+                </a>
+
+                <a href="/category/science">
+
+                    <i class="fa-solid fa-flask"></i>
+
+                    Science
+
+                </a>
+
+                <a href="/category/sports">
+
+                    <i class="fa-solid fa-football"></i>
+
+                    Sports
+
+                </a>
+
+                <a href="/category/entertainment">
+
+                    <i class="fa-solid fa-film"></i>
+
+                    Entertainment
+
+                </a>
+
+                <a href="/category/celebrities">
+
+                    <i class="fa-solid fa-star"></i>
+
+                    Celebrities
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= USER SECTION ================= -->
+
+    <div class="user-section">
+
+        {% if session.get('user') %}
+
+            <!-- ================= BOOKMARK ================= -->
+
+            <div class="bookmark-wrapper">
+
+                <a
+                    href="/dashboard"
+                    class="icon-btn"
+                    title="Bookmarks"
+                >
+
+                    <i class="fa-solid fa-bookmark"></i>
+
+                </a>
+
+                {% if total_bookmarks and total_bookmarks > 0 %}
+
+                    <span class="bookmark-badge">
+
+                        {{ total_bookmarks }}
+
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+            <!-- ================= USER ================= -->
+
+            <a
+                href="/dashboard"
+                class="icon-btn"
+                title="Dashboard"
+            >
+
+                <i class="fa-solid fa-user"></i>
+
+            </a>
+
+            <!-- ================= ADMIN ================= -->
+
+            {% if session.get('role') == 'admin' %}
+
+                <a
+                    href="/admin"
+                    class="icon-btn"
+                    title="Admin Dashboard"
+                >
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                </a>
+
+            {% endif %}
+
+            <!-- ================= LOGOUT ================= -->
+
+            <a
+                href="/logout"
+                class="icon-btn logout-btn"
+                title="Logout"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+            </a>
+
+        {% else %}
+
+            <!-- ================= LOGIN / REGISTER ================= -->
+
+            <a
+                href="/auth"
+                class="icon-btn"
+                title="Login or Register"
+            >
+
+                <i class="fa-solid fa-user"></i>
+
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main class="container">
+
+    {% block content %}{% endblock %}
+
+</main>
+
+</body>
+
+</html>

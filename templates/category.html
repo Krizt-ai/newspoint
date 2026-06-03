@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>{{ title }} News</h1>
+
+<div class="news-grid">
+{% for article in articles %}
+<a href="{{ article.url }}" target="_blank" class="card-link">
+    <div class="card">
+
+        {% if article.image %}
+            <img src="{{ article.image }}" class="news-img">
+        {% endif %}
+
+        <div class="card-content">
+            <h3>{{ article.title }}</h3>
+            <p>{{ article.description }}</p>
+        </div>
+
+    </div>
+</a>
+{% endfor %}
+</div>
+
+{% endblock %}

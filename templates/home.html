@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- ================= HERO ================= -->
+
+<div class="hero-section">
+
+    <div class="hero-left">
+
+        <h1 class="hero-title">
+            Stay Updated With The Latest News
+        </h1>
+
+        <p class="hero-text">
+            Breaking news from the Philippines and around the world.
+            Fast, modern, and reliable journalism powered by NEWSPOINT.
+        </p>
+
+    </div>
+
+</div>
+
+<!-- ================= PH NEWS ================= -->
+
+<div class="section-header">
+
+    <h1>Philippine News</h1>
+
+</div>
+
+<div class="news-grid">
+
+{% for article in ph_news %}
+
+<div class="news-card">
+
+    <!-- IMAGE -->
+
+    <div class="news-image-container">
+
+        {% if article.image %}
+
+            <img src="{{ article.image }}" class="news-img">
+
+        {% else %}
+
+            <img src="{{ url_for('static', filename='default-news.jpg') }}" class="news-img">
+
+        {% endif %}
+
+        <!-- BOOKMARK -->
+
+        {% if session.get('user') %}
+
+            <a
+                href="/bookmark?title={{ article.title }}&url={{ article.url }}&image={{ article.image }}"
+                class="bookmark-btn"
+            >
+                🔖
+            </a>
+
+        {% else %}
+
+            <a
+                href="/auth"
+                class="bookmark-btn"
+            >
+                🔖
+            </a>
+
+        {% endif %}
+
+    </div>
+
+    <!-- CONTENT -->
+
+    <div class="card-content">
+
+        <div class="news-meta">
+
+            <span class="news-tag">
+                Philippines
+            </span>
+
+        </div>
+
+        <h3>
+            {{ article.title }}
+        </h3>
+
+        <p>
+            {{ article.description }}
+        </p>
+
+        <a
+            href="{{ article.url }}"
+            target="_blank"
+            class="read-more"
+        >
+            Read Full Article →
+        </a>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<!-- ================= INTERNATIONAL NEWS ================= -->
+
+<div class="section-header section-title">
+
+    <h1>International News</h1>
+
+</div>
+
+<div class="news-grid">
+
+{% for article in intl_news %}
+
+<div class="news-card">
+
+    <!-- IMAGE -->
+
+    <div class="news-image-container">
+
+        {% if article.image %}
+
+            <img src="{{ article.image }}" class="news-img">
+
+        {% else %}
+
+            <img src="{{ url_for('static', filename='default-news.jpg') }}" class="news-img">
+
+        {% endif %}
+
+        <!-- BOOKMARK -->
+
+        {% if session.get('user') %}
+
+            <a
+                href="/bookmark?title={{ article.title }}&url={{ article.url }}&image={{ article.image }}"
+                class="bookmark-btn"
+            >
+                🔖
+            </a>
+
+        {% else %}
+
+            <a
+                href="/login"
+                class="bookmark-btn"
+            >
+                🔖
+            </a>
+
+        {% endif %}
+
+    </div>
+
+    <!-- CONTENT -->
+
+    <div class="card-content">
+
+        <div class="news-meta">
+
+            <span class="news-tag">
+                International
+            </span>
+
+        </div>
+
+        <h3>
+            {{ article.title }}
+        </h3>
+
+        <p>
+            {{ article.description }}
+        </p>
+
+        <a
+            href="{{ article.url }}"
+            target="_blank"
+            class="read-more"
+        >
+            Read Full Article →
+        </a>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}
