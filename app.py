@@ -1,18 +1,16 @@
-from flask import Flask, render_template, request, redirect, session
-from flask_mysqldb import MySQL
-from flask_bcrypt import Bcrypt
+import os
 import requests
 
 app = Flask(__name__)
 app.secret_key = "newspoint_secret"
 
 # ================= DATABASE =================
+app.config['MYSQL_HOST'] = os.getenv('mysql.railway.internal')
+app.config['MYSQL_USER'] = os.getenv('root')
+app.config['MYSQL_PASSWORD'] = os.getenv('YpnUTzgOOcaStzXoyFOvoiSmVyjjkjhy')
+app.config['MYSQL_DB'] = os.getenv('railway')
+app.config['MYSQL_PORT'] = int(os.getenv('3306', 3306))
 
-app.config['MYSQL_HOST'] = 'mysql.railway.internal'
-app.config['MYSQL_PORT'] = 3306
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'YpnUTzgOOcaStzXoyFOvoiSmVyjjkjhy'
-app.config['MYSQL_DB'] = 'railway'
 
 mysql = MySQL(app)
 bcrypt = Bcrypt(app)
