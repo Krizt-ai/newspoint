@@ -77,7 +77,7 @@ def get_news(query):
 
 @app.route('/')
 def home():
-    try:
+    
         ph_news = get_news("philippines")
         intl_news = get_news("world")
 
@@ -88,10 +88,12 @@ def home():
 
         cur.close()
 
-        return f"Database Connected! News rows: {len(local_news)}"
-
-    except Exception as e:
-        return f"ERROR: {str(e)}"
+return render_template(
+    'home.html',
+    local_news=local_news,
+    ph_news=ph_news,
+    intl_news=intl_news
+)
 
 # ================= CATEGORY =================
 
