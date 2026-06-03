@@ -77,22 +77,27 @@ def get_news(query):
 
 @app.route('/')
 def home():
-    
+    local_news = []
+    ph_news = []
+    intl_news = []
+
+    try:
         ph_news = get_news("philippines")
         intl_news = get_news("world")
 
         cur = mysql.connection.cursor()
-
         cur.execute("SELECT * FROM news ORDER BY id DESC")
         local_news = cur.fetchall()
-
         cur.close()
 
-return render_template(
-    'home.html',
-    local_news=local_news,
-    ph_news=ph_news,
-    intl_news=intl_news
+    except Exception as e:
+        print("HOME ERROR:", e)
+
+    return render_template(
+        'home.html',
+        local_news=local_news,
+        ph_news=ph_news,
+        intl_news=intl_news
 )
 
 # ================= CATEGORY =================
